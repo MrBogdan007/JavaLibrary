@@ -18,4 +18,12 @@ public class Book {
 		return String.format("ISBN - %s, name - %s, author - %s", ISBN, name, author);
 	}
 
+	public String getISBN() {
+		return ISBN;
+	}
+
+	public void setISBN(String iSBN) {
+		ISBN = iSBN;
+	}
+
 }

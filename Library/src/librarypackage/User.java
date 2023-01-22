@@ -2,15 +2,10 @@ package librarypackage;
 
 public class User {
 	enum Role {
-		LIBRARIAN, VISITOR,
+		librarian, visitor,
 	}
 
-	private Role librarian = Role.LIBRARIAN;
-	private Role customer = Role.VISITOR;
-
-	public User(Role librarian, Role customer) {
-		this.librarian = librarian;
-		this.customer = customer;
-	}
+	public Role librarian = Role.librarian;
+	public Role customer = Role.visitor;
 
 }
