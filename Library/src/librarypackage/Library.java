@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Library extends User {
 	ArrayList<Book> books = new ArrayList();
-	private static Boolean visitor;
+
 	static ArrayList<String> ISBNal = new ArrayList();
 
 	public static void main(String[] args) {
@@ -15,34 +15,32 @@ public class Library extends User {
 		Library library = new Library();
 		// admin menu
 		if (library.checkCredentials()) {
-			library.addNewBook();
+			Book gameOfThrones = new Book("A Game of Thrones", generateISBN(), new Author("George R. R. Martin"));
+			gameOfThrones.setNoOfCopies(24);
+			gameOfThrones.setGenre("novel");
+			library.addNewBook(gameOfThrones);
 			library.checkBooks();
-			library.editBook();
+			library.editBook(new Book("edited book", generateISBN(), new Author("George R. R. Martin")));
 			library.checkBooks();
+			library.addNewBook(new Book("A Game of Thorns", generateISBN(), new Author("George Griffin")));
+			library.addNewBook(new Book("Black echo", generateISBN(), new Author("Peter Griffin")));
 			library.deleteBook(0);
 			library.checkBooks();
-			library.addNewBook();
-			library.addNewBook();
-			library.addNewBook();
 
 		}
 		// user menu
 		if (library.checkCredentials()) {
-			library.addNewBook();
+			library.addNewBook(new Book("A Game of Thrones", generateISBN(), new Author("George R. R. Martin")));
 			library.checkBooks();
-			library.editBook();
+			library.editBook(new Book("edited book", generateISBN(), new Author("George R. R. Martin")));
 			library.checkBooks();
 			library.deleteBook(0);
 			library.checkBooks();
-			library.addNewBook();
-			library.addNewBook();
-			library.addNewBook();
 
 		} else {
 			try {
-				if (visitor == true) {
-					library.borrowBook();
-				}
+				library.borrowBook();
+
 			} catch (Exception e) {
 				return;
 			}
@@ -56,7 +54,15 @@ public class Library extends User {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Type ISBN of the book you want to borrow");
-		Integer typed = scanner.nextInt();
+		String typed = scanner.next();
+		for (String number : ISBNal) {
+			if (number.equals(typed)) {
+				ISBNal.remove(typed);
+				System.out.println("Book has been borrowed");
+				System.out.println("Available books are : " + ISBNal);
+			}
+		}
+
 //		books.stream().filter(book -> book.ISBN).forEach(System.out.println(book)); in javascript i can access by dot notation
 
 	}
@@ -67,8 +73,8 @@ public class Library extends User {
 
 	}
 
-	private void editBook() {
-		books.set(0, new Book("edited book", generateISBN(), new Author("George R. R. Martin")));
+	private void editBook(Book book) {
+		books.set(0, book);
 		System.out.println("Book has been changed!");
 
 	}
@@ -85,9 +91,8 @@ public class Library extends User {
 
 	}
 
-	private void addNewBook() {
-		books.add(new Book("A Game of Thrones", generateISBN(), new Author("George R. R. Martin")));
-		books.add(new Book("A Game of Books", generateISBN(), new Author("George Bokkenson")));
+	private void addNewBook(Book book) {
+		books.add(book);
 		System.out.println("Book has been added!");
 
 	}
@@ -103,7 +108,6 @@ public class Library extends User {
 			return true;
 		} else {
 			System.out.println("You logged in as a visitor");
-			this.visitor = true;
 			return false;
 		}
 
