@@ -131,7 +131,6 @@ public class Library extends User {
 		arrOfStr[7] += "-";
 		String ISBN = String.join("", arrOfStr);
 		return "978-" + ISBN;
-
 	}
 
 	private static String toString(BigInteger b) {
