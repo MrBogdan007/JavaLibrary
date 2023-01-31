@@ -6,16 +6,8 @@ public class Book {
 	private String ISBN;
 	private Author author;
 	// not mandatory properties
-	private int noOfCopies;
+	private int noOfCopies = 1;
 	private String genre;
-
-	public String getGenre() {
-		return genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
 
 	public Book(String name, String ISBN, Author author) {
 		this.name = name;
@@ -24,10 +16,12 @@ public class Book {
 
 	}
 
-	@Override
-	public String toString() {
-		return String.format("ISBN - %s, name - %s, author - %s, genre - %s, number of copies - %d", ISBN, name, author,
-				genre, noOfCopies);
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 
 	public String getISBN() {
@@ -44,6 +38,12 @@ public class Book {
 
 	public void setISBN(String iSBN) {
 		ISBN = iSBN;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("ISBN - %s, name - %s, author - %s, genre - %s, number of copies - %d", ISBN, name, author,
+				genre, noOfCopies);
 	}
 
 }
